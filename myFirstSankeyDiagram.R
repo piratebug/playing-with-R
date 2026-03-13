@@ -4,9 +4,9 @@ library(dplyr)
 
 # A connection data frame is a list of flows with intensity for each flow
 links <- data.frame(
-  source=c("group_A","group_A", "group_B", "group_C", "group_C", "group_E"), 
-  target=c("group_C","group_D", "group_E", "group_F", "group_G", "group_H"), 
-  value=c(2,3, 2, 3, 1, 3)
+  source=c("group_A","group_A", "group_B", "group_C", "group_C", "group_C", "group_E", "group_D"), 
+  target=c("group_C","group_D", "group_E", "group_F", "group_G", "group_H", "group_H", "group_F"), 
+  value=c(2,3, 2, 3, 1, 1, 3, 1)
 )
 
 # From these flows we need to create a node data frame: it lists every entities involved in the flow
