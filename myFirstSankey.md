@@ -11,7 +11,7 @@ and just hard coded the data since it's a beginner project.
 
 ## Output
 
-![](./outputs/hundredJobSankey.png)
+![](./outputs/hundredJobSankeyUpdated.png)
 
 
 ## License
