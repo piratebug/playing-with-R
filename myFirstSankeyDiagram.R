@@ -4,9 +4,14 @@ library(dplyr)
 
 # A connection data frame is a list of flows with intensity for each flow
 links <- data.frame(
-  source=c("Indeed","Indeed", "ZipRecruiter", "ZipRecruiter", "LinkedIn", "LinkedIn", "Government Sites", "Government Sites", "Company Sites", "Company Sites"), 
-  target=c("GIS Jobs","Other Jobs", "GIS Jobs", "Other Jobs", "GIS Jobs", "Other Jobs", "GIS Jobs", "Other Jobs", "GIS Jobs", "Other Jobs"), 
-  value=c(4,21,2,3,11,5,9,2,26,17)
+  source=c("Indeed","Indeed", "ZipRecruiter", "ZipRecruiter", "LinkedIn", "LinkedIn", "Government Sites", 
+           "Government Sites", "Company Sites", "Company Sites", "GIS Jobs", "GIS Jobs", "Other Jobs", 
+           "Other Jobs", "Cover Letter", "Cover Letter", "Cover Letter", "No Cover Letter", "No Cover Letter",
+           "No Cover Letter"), 
+  target=c("GIS Jobs","Other Jobs", "GIS Jobs", "Other Jobs", "GIS Jobs", "Other Jobs", "GIS Jobs", 
+           "Other Jobs", "GIS Jobs", "Other Jobs", "Cover Letter", "No Cover Letter", "Cover Letter", 
+           "No Cover Letter", "Not Selected", "Ghosted", "Pending", "Not Selected", "Ghosted", "Pending"), 
+  value=c(4,21,2,3,11,5,9,2,26,17,15,37,9,39,18,3,3,27,27,22)
 )
 
 # From these flows we need to create a node data frame: it lists every entities involved in the flow
