@@ -26,7 +26,7 @@ get_geonames_data <- function() {
   )
 }
 
-get_geonames_data()
+#get_geonames_data()
 
 ## Load data
 load_geonames_data <- function() {
@@ -36,4 +36,23 @@ load_geonames_data <- function() {
 
 places_df <- load_geonames_data()
 
-head(places_df)
+#head(places_df)
+
+## Cleaning the data
+### creates a new df that passes in only the pieces we need from places_df and renames the columns
+places_modified_df <- places_df[, c(2, 7, 14, 20)]
+names(places_modified_df) <- c("name", "country_code", "population", "coords")
+
+#head(places_modified_df)
+
+### splits the coords field into two new fields, lat and long
+places_modified_df[c("lat", "long")] <-
+  stringr::str_split_fixed(
+    places_modified_df$coords, ",", 2
+  )
+
+### remove the coords field
+places_clean_df <- places_modified_df |>
+  dplyr::select(-coords)
+
+#head(places_clean_df)
