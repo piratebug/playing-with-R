@@ -56,3 +56,15 @@ places_clean_df <- places_modified_df |>
   dplyr::select(-coords)
 
 #head(places_clean_df)
+
+## Converting df to a shapefile / note: crs = coordinate reference system
+crsLONGLAT <-
+  "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+
+places_sf <- places_modified_df |>
+  sf::st_as_sf(
+    coords = c("long", "lat"),
+    crs = crsLONGLAT
+  )
+
+places_sf
