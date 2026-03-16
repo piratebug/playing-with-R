@@ -26,7 +26,7 @@ get_geonames_data <- function() {
   )
 }
 
-#get_geonames_data()
+get_geonames_data()
 
 ## Load data
 load_geonames_data <- function() {
