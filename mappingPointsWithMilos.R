@@ -67,4 +67,12 @@ places_sf <- places_modified_df |>
     crs = crsLONGLAT
   )
 
-places_sf
+#places_sf
+
+# Getting Mappy!
+ggplot() +
+  geom_sf(
+    data = places_sf,
+    color = "#6FC4D9", fill = "#6FC4D9"
+  )
+
