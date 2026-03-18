@@ -87,3 +87,18 @@ ggplot() +
     color = "#7d1d53", fill = "#7d1d53"
   )
 
+## Calling a country shapefile its by ISo3 code, set it to the same coordinate system
+uk <- giscoR::gisco_get_countries(
+  resolution = "1",
+  country = "GBR"
+) |>
+  sf::st_transform(crsLONGLAT)
+
+#plot(uk)
+
+## Check if points exist within the polygon (intersect) and plot only those places
+uk_places <- sf::st_intersection(
+  places_sf, uk
+)
+
+plot(uk_places)
