@@ -26,7 +26,7 @@ get_geonames_data <- function() {
   )
 }
 
-get_geonames_data()
+#get_geonames_data()
 
 ## Load data
 load_geonames_data <- function() {
@@ -74,5 +74,16 @@ ggplot() +
   geom_sf(
     data = places_sf,
     color = "#6FC4D9", fill = "#6FC4D9"
+  )
+
+## Filter by country
+### https://www.iban.com/country-codes
+ggplot() +
+  geom_sf(
+    data = dplyr::filter(
+      places_sf,
+      country_code == "UK"
+    ),
+    color = "#7d1d53", fill = "#7d1d53"
   )
 
