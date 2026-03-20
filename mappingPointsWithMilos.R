@@ -1,6 +1,6 @@
 # Libraries
 libs <- c("tidyverse", "stringr", "httr", "sf",
-          "giscoR", "scales"
+          "giscoR", "scales", "ggrepel"
 )
 
 # Install missing libraries
@@ -105,15 +105,65 @@ ggplot() +
 #plot(uk_places)
  
 ## Scale the circle sizes to the population size
- ggplot() +
-   geom_sf(
-     data = uk_places, 
-     aes(size = population),
-     color = "#7d1d53",
-     alpha = .5
-   ) +
-   ### Set thresholds for scaling
-   scale_size(
-     range = c(1, 10),
-     breaks = scales::pretty_breaks(n=6)
-   )
+### This section is updated below to incorporate labels
+ # ggplot() +
+ #   geom_sf(
+ #     data = uk_places, 
+ #     aes(size = population),
+ #     color = "#7d1d53",
+ #     alpha = .5
+ #   ) +
+ #   ### Set thresholds for scaling
+ #   scale_size(
+ #     range = c(1, 10),
+ #     breaks = scales::pretty_breaks(n=6)
+ #   )
+ 
+ # Adding Labels
+ ## Straightforward method, using the dataframe we already have
+uk_labeled_places <- places_clean_df |>
+  dplyr::filter(
+    country_code == "GB"
+  ) |>
+  dplyr::select(
+    name, long, lat, population
+  ) |>
+  dplyr::arrange(desc(population))
+
+
+## Alternative method, creating a dataframe from the shapefile
+# uk_labeled_places <- uk_places |>
+#   dplyr::mutate(
+#     long = unlist(map(geometry, 1)),
+#     lat = unlist(map(geometry, 2))
+#   ) |>
+#   dplyr::select(
+#     name, long, lat, population
+#   ) |>
+#   sf::st_drop_geometry() |>
+#   as.data.frame() |>
+#   dplyr::arrange(desc(population))
+
+head(uk_labeled_places)
+
+## Plotting with labels for the 10 most populated places in the UK
+ggplot() +
+  geom_sf(
+    data = uk_places, 
+    aes(size = population),
+    color = "#7d1d53",
+    alpha = .5
+  ) +
+  ### Set thresholds for scaling
+  scale_size(
+    range = c(1, 10),
+    breaks = scales::pretty_breaks(n=6)
+  ) +
+  ### Add labels
+  ggrepel::geom_text_repel(
+    uk_labeled_places[1:10, ],
+    mapping = aes(x = long, y = lat, label = name),
+    color = "grey20",
+    fontface = "bold",
+    size = 4
+    )
