@@ -82,23 +82,38 @@ ggplot() +
   geom_sf(
     data = dplyr::filter(
       places_sf,
-      country_code == "UK"
+      country_code == "GB"
     ),
     color = "#7d1d53", fill = "#7d1d53"
   )
 
 ## Calling a country shapefile its by ISo3 code, set it to the same coordinate system
-uk <- giscoR::gisco_get_countries(
-  resolution = "1",
-  country = "GBR"
-) |>
-  sf::st_transform(crsLONGLAT)
+### gisco_get_unit_country also works here (be sure to update parameters)
+ uk <- giscoR::gisco_get_countries(
+   resolution = "1",
+   country = "GBR"
+    ) |>
+   sf::st_transform(crsLONGLAT)
 
 #plot(uk)
 
 ## Check if points exist within the polygon (intersect) and plot only those places
-uk_places <- sf::st_intersection(
-  places_sf, uk
-)
+ uk_places <- sf::st_intersection(
+   places_sf, uk
+ )
 
-plot(uk_places)
+#plot(uk_places)
+ 
+## Scale the circle sizes to the population size
+ ggplot() +
+   geom_sf(
+     data = uk_places, 
+     aes(size = population),
+     color = "#7d1d53",
+     alpha = .5
+   ) +
+   ### Set thresholds for scaling
+   scale_size(
+     range = c(1, 10),
+     breaks = scales::pretty_breaks(n=6)
+   )
