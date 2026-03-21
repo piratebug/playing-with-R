@@ -146,26 +146,70 @@ uk_labeled_places <- uk_places |>
   as.data.frame() |>
   dplyr::arrange(desc(population))
 
-head(uk_labeled_places)
+# head(uk_labeled_places)
 
 ## Plotting with labels for the 10 most populated places in the UK
+# ggplot() +
+#   geom_sf(
+#     data = uk_places, 
+#     aes(size = population),
+#     color = "#7d1d53",
+#     alpha = .5
+#   ) +
+  ### Set thresholds for scaling
+  # scale_size(
+  #   range = c(1, 10),
+  #   breaks = scales::pretty_breaks(n=6)
+  # ) +
+  ### Add labels
+  # ggrepel::geom_text_repel(
+  #   uk_labeled_places[1:10, ],
+  #   mapping = aes(x = long, y = lat, label = name),
+  #   color = "grey20",
+  #   fontface = "bold",
+  #   size = 4
+  #   )
+
+# Adding geographic borders
 ggplot() +
+  ## set border
   geom_sf(
-    data = uk_places, 
+    data =uk,
+    color = "grey20", fill = "transparent"
+  ) +
+  ## plot points
+  geom_sf(
+    data = uk_places,
     aes(size = population),
-    color = "#7d1d53",
+    color = "#7d1d53", fill = "#7d1d53",
     alpha = .5
   ) +
-  ### Set thresholds for scaling
+  ## scale points
   scale_size(
-    range = c(1, 10),
+    range = c(1, 15),
     breaks = scales::pretty_breaks(n=6)
   ) +
-  ### Add labels
+  ## add labels
   ggrepel::geom_text_repel(
     uk_labeled_places[1:10, ],
-    mapping = aes(x = long, y = lat, label = name),
-    color = "grey20",
-    fontface = "bold",
-    size = 4
+    mapping = aes(x = long, y = lat, label = name)
+    ) +
+  ## make it pretty!
+  theme_minimal() +
+    theme(
+      axis.line = element_blank(),
+      axis.text.x = element_blank(),
+      axis.text.y = element_blank(),
+      axis.ticks = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      plot.margin = unit(
+        c(t = 0, r = 0, b = 0, l = 0), "lines"
+      ),
+      plot.background = element_rect(fill = "white", color = NA),
+      panel.background = element_rect(fill = "white", color = NA),
+      legend.background = element_rect(fill = "white", color = NA),
+      panel.border = element_blank()
     )
