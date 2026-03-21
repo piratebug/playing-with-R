@@ -121,28 +121,30 @@ ggplot() +
  
  # Adding Labels
  ## Straightforward method, using the dataframe we already have
-uk_labeled_places <- places_clean_df |>
-  dplyr::filter(
-    country_code == "GB"
-  ) |>
-  dplyr::select(
-    name, long, lat, population
-  ) |>
-  dplyr::arrange(desc(population))
-
-
-## Alternative method, creating a dataframe from the shapefile
-# uk_labeled_places <- uk_places |>
-#   dplyr::mutate(
-#     long = unlist(map(geometry, 1)),
-#     lat = unlist(map(geometry, 2))
+ ## Using this method results in ERROR "Scale limits cannot be mapped onto spatial
+ ## coordinates in coord_sf()" 
+# uk_labeled_places <- places_clean_df |>
+#   dplyr::filter(
+#     country_code == "GB"
 #   ) |>
 #   dplyr::select(
 #     name, long, lat, population
 #   ) |>
-#   sf::st_drop_geometry() |>
-#   as.data.frame() |>
 #   dplyr::arrange(desc(population))
+
+
+## Alternative method, creating a dataframe from the shapefile
+uk_labeled_places <- uk_places |>
+  dplyr::mutate(
+    long = unlist(map(geometry, 1)),
+    lat = unlist(map(geometry, 2))
+  ) |>
+  dplyr::select(
+    name, long, lat, population
+  ) |>
+  sf::st_drop_geometry() |>
+  as.data.frame() |>
+  dplyr::arrange(desc(population))
 
 head(uk_labeled_places)
 
