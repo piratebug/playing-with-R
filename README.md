@@ -6,7 +6,7 @@ Connected Git and RStudio with the help of https://happygitwithr.com/
 
 ## Projects
 * [MyFirstSankey.md](./myFirstSankey.md)
-
+* [MappingPointsWithMilos.md](./pointsWithMilos.md)
 
 
 
