@@ -12,7 +12,7 @@ to map points and perform some basic geospatial analysis, only using R.
 - ggrepel
 
 ## Output
-![](./outputs/pointsWithMilos.jpg)
+![](./outputs/pointsWithMilos.png)
 
 ## License
 GNU General Public License v3.0
