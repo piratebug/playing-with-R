@@ -1,5 +1,5 @@
 # Mapping Points with Milos
-Here, I follow [Milos Agathon's](https://github.com/milos-agathon) YouTube tutorial
+Here, I follow [Milos Popovic's](https://github.com/milos-agathon) YouTube tutorial
 to map points and perform some basic geospatial analysis, only using R.
 
 *Libraries*
